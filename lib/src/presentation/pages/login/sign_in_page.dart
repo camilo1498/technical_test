@@ -22,21 +22,28 @@ class SignInPage extends StatefulWidget {
 class _SignInPageState extends State<SignInPage> {
   /// Scaffold key
   final GlobalKey _scaffoldKey = GlobalKey();
+
   /// controllers
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _pwdController = TextEditingController();
+
   /// focus node
   final FocusNode _emailNode = FocusNode();
   final FocusNode _pwdNode = FocusNode();
+
   /// change field
-  _fieldFocusChange(BuildContext context, FocusNode currentFocus, FocusNode nextFocus){
+  _fieldFocusChange(
+      BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
     currentFocus.unfocus();
     FocusScope.of(context).requestFocus(nextFocus);
   }
+
   /// validate login
   bool _loading = false;
+
   /// mediaQuery
   final _size = MediaQueryData.fromWindow(WidgetsBinding.instance!.window);
+
   /// instance of firebase authentication
   final FirebaseAuthentication _authentication = FirebaseAuthentication();
   @override
@@ -62,18 +69,22 @@ class _SignInPageState extends State<SignInPage> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           const Spacer(),
+
                           /// logo
                           SizedBox(
                               height: 200,
                               width: 200,
-                              child: Image.asset('assets/icons/logo.png')
+                              child: Image.asset('assets/icons/logo.png')),
+                          const SizedBox(
+                            height: 20,
                           ),
-                          const SizedBox(height: 20,),
+
                           /// title
                           SizedBox(
                             width: _size.size.width,
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 30),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 30),
                               child: Text(
                                 'Welcome',
                                 style: TextStyle(
@@ -85,7 +96,10 @@ class _SignInPageState extends State<SignInPage> {
                               ),
                             ),
                           ),
-                          const SizedBox(height: 30,),
+                          const SizedBox(
+                            height: 30,
+                          ),
+
                           /// email field
                           AuthTextField(
                             textFieldType: TextFieldType.email,
@@ -95,11 +109,14 @@ class _SignInPageState extends State<SignInPage> {
                             textInputType: TextInputType.emailAddress,
                             hintText: 'Email address',
                             validationText: "• Invalid email",
-                            onFieldSubmitted: (){
+                            onFieldSubmitted: () {
                               _fieldFocusChange(context, _emailNode, _pwdNode);
                             },
                           ),
-                          const SizedBox(height: 20,),
+                          const SizedBox(
+                            height: 20,
+                          ),
+
                           /// password field
                           AuthTextField(
                             textFieldType: TextFieldType.password,
@@ -108,14 +125,18 @@ class _SignInPageState extends State<SignInPage> {
                             textInputAction: TextInputAction.done,
                             textInputType: TextInputType.text,
                             hintText: 'Password',
-                            validationText: "• The password must have at least 8 characters.\n• The password must have at least one lowercase letter.\n• The password must have at least one uppercase letter.\n• The password must have numbers.\n• The password must have characters specials.",
-                            onFieldSubmitted: () async{
+                            validationText:
+                                "• The password must have at least 8 characters.\n• The password must have at least one lowercase letter.\n• The password must have at least one uppercase letter.\n• The password must have numbers.\n• The password must have characters specials.",
+                            onFieldSubmitted: () async {
                               _pwdNode.unfocus();
                               _signIn();
                             },
                           ),
-                          const SizedBox(height: 25,),
+                          const SizedBox(
+                            height: 25,
+                          ),
                           const Spacer(),
+
                           /// sign button
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -126,6 +147,7 @@ class _SignInPageState extends State<SignInPage> {
                             ),
                           ),
                           const Spacer(flex: 2),
+
                           /// have account text
                           Padding(
                               padding: const EdgeInsets.only(bottom: 20),
@@ -133,46 +155,44 @@ class _SignInPageState extends State<SignInPage> {
                                   alignment: Alignment.bottomCenter,
                                   child: RichText(
                                     textAlign: TextAlign.center,
-                                    text: TextSpan(
-                                        children: [
-                                          TextSpan(
-                                            text: "Don't you have an account yet?\n",
-                                            style: TextStyle(
-                                              color: Colors.grey[900]!.withOpacity(0.5),
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 12.2,
-                                            ),
+                                    text: TextSpan(children: [
+                                      TextSpan(
+                                        text:
+                                            "Don't you have an account yet?\n",
+                                        style: TextStyle(
+                                          color: Colors.grey[900]!
+                                              .withOpacity(0.5),
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 12.2,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                          text: 'Sign up',
+                                          style: TextStyle(
+                                            color: HexColor.fromHex('#1C2938'),
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 12,
                                           ),
-                                          TextSpan(
-                                              text: 'Sign up',
-                                              style: TextStyle(
-                                                color: HexColor.fromHex('#1C2938'),
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 12,
-                                              ),
-                                              recognizer: TapGestureRecognizer()
-                                                ..onTap = () {
-                                                  /// set vibration
-                                                  HapticFeedback.lightImpact();
-                                                  /// open sign up page
-                                                  Navigator.of(context).push(
-                                                      PageTransitionAnimation(
-                                                          child: const SignUpPage(),
-                                                          direction: AxisDirection.left
-                                                      )
-                                                  );
-                                                }
-                                          )
-                                        ]
-                                    ),
-                                  )
-                              )
-                          )
+                                          recognizer: TapGestureRecognizer()
+                                            ..onTap = () {
+                                              /// set vibration
+                                              HapticFeedback.lightImpact();
+
+                                              /// open sign up page
+                                              Navigator.of(context).push(
+                                                  PageTransitionAnimation(
+                                                      child: const SignUpPage(),
+                                                      direction:
+                                                          AxisDirection.left));
+                                            })
+                                    ]),
+                                  )))
                         ],
                       ),
                     ),
                   ),
                 ),
+
                 /// safe area top color
                 AnimatedContainer(
                   duration: const Duration(milliseconds: 300),
@@ -183,38 +203,38 @@ class _SignInPageState extends State<SignInPage> {
               ],
             ),
           ),
-          if(_loading)
-            const LoadingIndicator()
+          if (_loading) const LoadingIndicator()
         ],
       ),
     );
   }
 
-  void _signIn() async{
-    if(!isEmail(_emailController.text.trim()) || !isPassword(_pwdController.text.trim())){
+  void _signIn() async {
+    if (!isEmail(_emailController.text.trim()) ||
+        !isPassword(_pwdController.text.trim())) {
       snackBar(
           scaffoldGlobalKey: _scaffoldKey,
           message: "Please check the fields and try again.",
           color: HexColor.fromHex('#1C2938'),
           labelText: 'close',
-          textColor: HexColor.fromHex('#EFEEEE')
-      );
-    } else{
+          textColor: HexColor.fromHex('#EFEEEE'));
+    } else {
       setState(() {
         _loading = !_loading;
       });
-      _authentication.signInWithEmail(
-          email: _emailController.text.trim(),
-          password: _pwdController.text.trim(),
-          errorCallback: (error){
-            /// show error dialog
-            exitDialog(
-                title: 'Authentication error',
-                context: context,
-                message: error.message!);
-          }
-      ).whenComplete(() {
-        if(mounted){
+      _authentication
+          .signInWithEmail(
+              email: _emailController.text.trim(),
+              password: _pwdController.text.trim(),
+              errorCallback: (error) {
+                /// show error dialog
+                exitDialog(
+                    title: 'Authentication error',
+                    context: context,
+                    message: error.message!);
+              })
+          .whenComplete(() {
+        if (mounted) {
           setState(() {
             _loading = !_loading;
           });

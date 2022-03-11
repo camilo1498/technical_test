@@ -6,16 +6,21 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:technical_test/src/presentation/pages/login/sign_in_page.dart';
 import 'package:technical_test/src/presentation/pages/user_tap_layout/user_layout.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Paint.enableDithering = true;
+
   /// initialize firebase
   await Firebase.initializeApp();
+
   /// force portrait mode
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+
   /// hide bottom navigation bar in android
-  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.top]);
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+      overlays: [SystemUiOverlay.top]);
+
   /// force transparent top bar
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
@@ -48,21 +53,20 @@ class _RootPage extends StatefulWidget {
 }
 
 class _RootPageState extends State<_RootPage> {
-
   @override
   void initState() {
     _getPermission();
     super.initState();
   }
 
-  _getPermission() async{
+  _getPermission() async {
     var _permissionStatus = [
       await Permission.camera.request(),
       await Permission.storage.request()
     ];
-    if(_permissionStatus[0].isGranted && _permissionStatus[1].isGranted){
+    if (_permissionStatus[0].isGranted && _permissionStatus[1].isGranted) {
       debugPrint('camera permission granted');
-    } else if(await Permission.speech.isPermanentlyDenied){
+    } else if (await Permission.speech.isPermanentlyDenied) {
       openAppSettings();
     }
   }
@@ -71,10 +75,10 @@ class _RootPageState extends State<_RootPage> {
   Widget build(BuildContext context) {
     return StreamBuilder<User?>(
       stream: FirebaseAuth.instance.authStateChanges(),
-      builder: (context, snapshot){
-        if(snapshot.hasData){
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
           return const UserLayout();
-        } else{
+        } else {
           return const SignInPage();
         }
       },

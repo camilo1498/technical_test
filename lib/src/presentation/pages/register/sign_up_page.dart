@@ -19,23 +19,30 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   /// form key
   final GlobalKey _scaffoldKey = GlobalKey();
+
   /// controllers
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _pwdController = TextEditingController();
   final TextEditingController _pwdController2 = TextEditingController();
+
   /// focus node
   final FocusNode _emailNode = FocusNode();
   final FocusNode _pwdNode = FocusNode();
   final FocusNode _pwdNode2 = FocusNode();
+
   /// change field
-  _fieldFocusChange(BuildContext context, FocusNode currentFocus, FocusNode nextFocus){
+  _fieldFocusChange(
+      BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
     currentFocus.unfocus();
     FocusScope.of(context).requestFocus(nextFocus);
   }
+
   /// validate login
   bool _loading = false;
+
   /// mediaQuery
   final _size = MediaQueryData.fromWindow(WidgetsBinding.instance!.window);
+
   /// instance of firebase authentication
   final FirebaseAuthentication _authentication = FirebaseAuthentication();
   @override
@@ -61,18 +68,22 @@ class _SignUpPageState extends State<SignUpPage> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           const Spacer(),
+
                           /// logo
                           SizedBox(
                               height: 200,
                               width: 200,
-                              child: Image.asset('assets/icons/logo.png')
+                              child: Image.asset('assets/icons/logo.png')),
+                          const SizedBox(
+                            height: 20,
                           ),
-                          const SizedBox(height: 20,),
+
                           /// title
                           SizedBox(
                             width: _size.size.width,
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 30),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 30),
                               child: Text(
                                 'Register form',
                                 style: TextStyle(
@@ -84,7 +95,10 @@ class _SignUpPageState extends State<SignUpPage> {
                               ),
                             ),
                           ),
-                          const SizedBox(height: 30,),
+                          const SizedBox(
+                            height: 30,
+                          ),
+
                           /// email field
                           AuthTextField(
                             textFieldType: TextFieldType.email,
@@ -94,11 +108,14 @@ class _SignUpPageState extends State<SignUpPage> {
                             textInputType: TextInputType.emailAddress,
                             hintText: 'Email address',
                             validationText: "• Invalid email",
-                            onFieldSubmitted: (){
+                            onFieldSubmitted: () {
                               _fieldFocusChange(context, _emailNode, _pwdNode);
                             },
                           ),
-                          const SizedBox(height: 20,),
+                          const SizedBox(
+                            height: 20,
+                          ),
+
                           /// password field
                           AuthTextField(
                             textFieldType: TextFieldType.password,
@@ -107,12 +124,16 @@ class _SignUpPageState extends State<SignUpPage> {
                             textInputAction: TextInputAction.next,
                             textInputType: TextInputType.text,
                             hintText: 'Password',
-                            validationText: "• The password must have at least 8 characters.\n• The password must have at least one lowercase letter.\n• The password must have at least one uppercase letter.\n• The password must have numbers.\n• The password must have characters specials.",
-                            onFieldSubmitted: (){
+                            validationText:
+                                "• The password must have at least 8 characters.\n• The password must have at least one lowercase letter.\n• The password must have at least one uppercase letter.\n• The password must have numbers.\n• The password must have characters specials.",
+                            onFieldSubmitted: () {
                               _fieldFocusChange(context, _pwdNode, _pwdNode2);
                             },
                           ),
-                          const SizedBox(height: 20,),
+                          const SizedBox(
+                            height: 20,
+                          ),
+
                           /// password field
                           AuthTextField(
                             textFieldType: TextFieldType.password,
@@ -121,14 +142,18 @@ class _SignUpPageState extends State<SignUpPage> {
                             textInputAction: TextInputAction.done,
                             textInputType: TextInputType.text,
                             hintText: 'Confirm password',
-                            validationText: "• The password must have at least 8 characters.\n• The password must have at least one lowercase letter.\n• The password must have at least one uppercase letter.\n• The password must have numbers.\n• The password must have characters specials.",
-                            onFieldSubmitted: (){
+                            validationText:
+                                "• The password must have at least 8 characters.\n• The password must have at least one lowercase letter.\n• The password must have at least one uppercase letter.\n• The password must have numbers.\n• The password must have characters specials.",
+                            onFieldSubmitted: () {
                               _pwdNode.unfocus();
                               _signUp();
                             },
                           ),
-                          const SizedBox(height: 25,),
+                          const SizedBox(
+                            height: 25,
+                          ),
                           const Spacer(),
+
                           /// sign button
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -144,6 +169,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                   ),
                 ),
+
                 /// safe area top color
                 AnimatedContainer(
                   duration: const Duration(milliseconds: 300),
@@ -152,11 +178,12 @@ class _SignUpPageState extends State<SignUpPage> {
                   width: _size.size.width,
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15,vertical: 60),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 60),
                   child: Align(
                     alignment: Alignment.topLeft,
                     child: AnimatedOnTapButton(
-                      onTap: (){
+                      onTap: () {
                         /// close page
                         Navigator.of(context).pop();
                       },
@@ -171,50 +198,48 @@ class _SignUpPageState extends State<SignUpPage> {
               ],
             ),
           ),
-          if(_loading)
-            const LoadingIndicator()
+          if (_loading) const LoadingIndicator()
         ],
       ),
     );
   }
 
-  void _signUp(){
-    if(
-    !isEmail(_emailController.text.trim()) ||
-        !isPassword(_pwdController.text.trim()) || !isPassword(_pwdController2.text.trim())
-    ){
+  void _signUp() {
+    if (!isEmail(_emailController.text.trim()) ||
+        !isPassword(_pwdController.text.trim()) ||
+        !isPassword(_pwdController2.text.trim())) {
       snackBar(
           scaffoldGlobalKey: _scaffoldKey,
           message: "Please check the fields and try again.",
           color: HexColor.fromHex('#1C2938'),
           labelText: 'close',
-          textColor: HexColor.fromHex('#EFEEEE')
-      );
+          textColor: HexColor.fromHex('#EFEEEE'));
+
       /// validate if both password fields are match
-    } else if(_pwdController.text.trim() != _pwdController2.text.trim()){
+    } else if (_pwdController.text.trim() != _pwdController2.text.trim()) {
       snackBar(
           scaffoldGlobalKey: _scaffoldKey,
           message: "Password does not match.",
           color: HexColor.fromHex('#1C2938'),
           labelText: 'close',
-          textColor: HexColor.fromHex('#EFEEEE')
-      );
-    } else{
+          textColor: HexColor.fromHex('#EFEEEE'));
+    } else {
       setState(() {
         _loading = !_loading;
       });
-      _authentication.signUpWithEmail(
-          email: _emailController.text.trim(),
-          password: _pwdController2.text.trim(),
-          errorCallback: (error){
-            /// show error dialog
-            exitDialog(
-                title: 'Sign up error',
-                context: context,
-                message: error.message!);
-          }
-      ).then((value) {
-        if(value != null){
+      _authentication
+          .signUpWithEmail(
+              email: _emailController.text.trim(),
+              password: _pwdController2.text.trim(),
+              errorCallback: (error) {
+                /// show error dialog
+                exitDialog(
+                    title: 'Sign up error',
+                    context: context,
+                    message: error.message!);
+              })
+          .then((value) {
+        if (value != null) {
           Navigator.of(context).pop();
         }
       }).whenComplete(() {

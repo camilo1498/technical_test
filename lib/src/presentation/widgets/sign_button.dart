@@ -29,19 +29,13 @@ class SignButton extends StatelessWidget {
                     color: HexColor.fromHex('#1C2938').withOpacity(0.5),
                     offset: const Offset(0, 1),
                     blurRadius: 1,
-                    spreadRadius: 1
-                ),
-              ]
-          ),
+                    spreadRadius: 1),
+              ]),
           child: Text(
             title,
             style: const TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w600,
-                fontSize: 15
-            ),
-          )
-      ),
+                color: Colors.white, fontWeight: FontWeight.w600, fontSize: 15),
+          )),
     );
   }
 }
@@ -50,12 +44,12 @@ class SocialButton extends StatelessWidget {
   final String iconRoute;
   final Function() onTap;
   final Color backgroundColor;
-  const SocialButton({
-    Key? key,
-    required this.iconRoute,
-    required this.onTap,
-    required this.backgroundColor
-  }) : super(key: key);
+  const SocialButton(
+      {Key? key,
+      required this.iconRoute,
+      required this.onTap,
+      required this.backgroundColor})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -64,15 +58,14 @@ class SocialButton extends StatelessWidget {
       child: Container(
         height: 50,
         width: 50,
-        decoration: BoxDecoration(
-          color: backgroundColor,
-          shape: BoxShape.circle
-        ),
+        decoration:
+            BoxDecoration(color: backgroundColor, shape: BoxShape.circle),
         child: Center(
-          child: Image.asset(iconRoute,),
+          child: Image.asset(
+            iconRoute,
+          ),
         ),
       ),
     );
   }
 }
-

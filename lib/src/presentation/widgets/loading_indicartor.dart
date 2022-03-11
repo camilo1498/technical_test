@@ -11,8 +11,7 @@ class LoadingIndicator extends StatelessWidget {
         child: Container(
           width: 80,
           decoration: BoxDecoration(
-              color: Colors.black54,
-              borderRadius: BorderRadius.circular(10)),
+              color: Colors.black54, borderRadius: BorderRadius.circular(10)),
           padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -20,7 +19,7 @@ class LoadingIndicator extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: const [
               Padding(
-                padding: EdgeInsets.only(top: 8,bottom: 8),
+                padding: EdgeInsets.only(top: 8, bottom: 8),
                 child: SizedBox(
                   height: 30,
                   width: 30,
@@ -29,7 +28,6 @@ class LoadingIndicator extends StatelessWidget {
                   ),
                 ),
               ),
-
             ],
           ),
         ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:technical_test/src/core/utils/extensions/hex_color.dart';
 import 'package:technical_test/src/data/sources/firebase_authentication.dart';
 import 'package:technical_test/src/presentation/pages/user_tap_layout/sub_pages/case_2.dart';
+import 'package:technical_test/src/presentation/pages/user_tap_layout/sub_pages/case_3.dart';
 import 'package:technical_test/src/presentation/widgets/animations/animated_onTap_button.dart';
 
 class UserLayout extends StatefulWidget {
@@ -11,9 +12,11 @@ class UserLayout extends StatefulWidget {
   _UserLayoutState createState() => _UserLayoutState();
 }
 
-class _UserLayoutState extends State<UserLayout> with SingleTickerProviderStateMixin{
+class _UserLayoutState extends State<UserLayout>
+    with SingleTickerProviderStateMixin {
   /// instance of firebase authentication
   final FirebaseAuthentication _authentication = FirebaseAuthentication();
+
   /// controller
   late TabController _tabBarController;
 
@@ -22,6 +25,7 @@ class _UserLayoutState extends State<UserLayout> with SingleTickerProviderStateM
     _tabBarController = TabController(length: 2, vsync: this);
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,16 +38,15 @@ class _UserLayoutState extends State<UserLayout> with SingleTickerProviderStateM
           child: Text(
             'Technical test',
             style: TextStyle(
-              color: HexColor.fromHex('#1C2938'),
-              fontWeight: FontWeight.w600
-            ),
+                color: HexColor.fromHex('#1C2938'),
+                fontWeight: FontWeight.w600),
           ),
         ),
         actions: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: AnimatedOnTapButton(
-              onTap: (){
+              onTap: () {
                 _authentication.signOut();
               },
               child: Icon(
@@ -61,19 +64,15 @@ class _UserLayoutState extends State<UserLayout> with SingleTickerProviderStateM
             Tab(
               child: Text(
                 'Case #2',
-                style: TextStyle(
-                  color: HexColor.fromHex('#1C2938'),
-                  fontSize: 15
-                ),
+                style:
+                    TextStyle(color: HexColor.fromHex('#1C2938'), fontSize: 15),
               ),
             ),
             Tab(
               child: Text(
                 'Case #3 & #4',
-                style: TextStyle(
-                    color: HexColor.fromHex('#1C2938'),
-                    fontSize: 15
-                ),
+                style:
+                    TextStyle(color: HexColor.fromHex('#1C2938'), fontSize: 15),
               ),
             )
           ],
@@ -81,9 +80,9 @@ class _UserLayoutState extends State<UserLayout> with SingleTickerProviderStateM
       ),
       body: TabBarView(
         controller: _tabBarController,
-        children: <Widget>[
-          const Case2(),
-          Container(color: Colors.orange,),
+        children: const <Widget>[
+          Case2(),
+          Case3(),
         ],
       ),
     );

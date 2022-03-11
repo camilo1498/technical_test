@@ -3,21 +3,15 @@
 RegExp _emailRegex = RegExp(
     r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
 
-RegExp _uppercase = RegExp(
-    r"(?=.*[a-z])(?=.*[A-Z])\w+"
-);
+RegExp _uppercase = RegExp(r"(?=.*[a-z])(?=.*[A-Z])\w+");
 
-RegExp _specialChar = RegExp(
-    r"^(.*?[$&+,\:;/=?@#|'<>.^*()_%!-]){1,}"
-);
+RegExp _specialChar = RegExp(r"^(.*?[$&+,\:;/=?@#|'<>.^*()_%!-]){1,}");
 
-RegExp _number = RegExp(
-    '^(.*?[0-9]){1,}'
-);
+RegExp _number = RegExp('^(.*?[0-9]){1,}');
 
 /// Check if string [input] is an email
 bool isEmail(String input) {
-    if (input.toString().length > 254) {
+  if (input.toString().length > 254) {
     return false;
   }
   var valid = _emailRegex.hasMatch(input);
@@ -38,19 +32,19 @@ bool isEmail(String input) {
   return true;
 }
 
-bool isPassword(String input){
+bool isPassword(String input) {
   var validUppercase = _uppercase.hasMatch(input);
   var validSpecialChar = _specialChar.hasMatch(input);
   var validNumber = _number.hasMatch(input);
-  if(input.length < 8){
+  if (input.length < 8) {
     return false;
-  } else if(!validUppercase){
+  } else if (!validUppercase) {
     return false;
-  } else if(!validSpecialChar){
+  } else if (!validSpecialChar) {
     return false;
-  } else if(!validNumber){
+  } else if (!validNumber) {
     return false;
-  } else{
+  } else {
     return true;
   }
 }

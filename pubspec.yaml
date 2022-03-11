@@ -28,6 +28,8 @@ dependencies:
       ref: 8156907eecfa812b181a5a729d790f6d399f311b
   # device permission
   permission_handler: ^9.2.0
+  # fetch api
+  http: ^0.13.4
 
 dev_dependencies:
   flutter_test:

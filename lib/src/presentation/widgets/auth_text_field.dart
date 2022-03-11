@@ -4,7 +4,8 @@ import 'package:technical_test/src/core/utils/extensions/hex_color.dart';
 import 'package:technical_test/src/core/utils/validations/textField_validator.dart';
 import 'package:technical_test/src/presentation/widgets/animations/animated_onTap_button.dart';
 
-enum TextFieldType{email,password,username}
+enum TextFieldType { email, password, username }
+
 class AuthTextField extends StatefulWidget {
   final TextEditingController? textEditingController;
   final FocusNode? textFocusNode;
@@ -14,17 +15,17 @@ class AuthTextField extends StatefulWidget {
   final TextInputAction textInputAction;
   final Function() onFieldSubmitted;
   final String validationText;
-  const AuthTextField({
-    Key? key,
-    required this.onFieldSubmitted,
-    this.textEditingController,
-    this.textFocusNode,
-    this.hintText,
-    this.validationText = '',
-    this.textFieldType = TextFieldType.email,
-    this.textInputType = TextInputType.emailAddress,
-    this.textInputAction = TextInputAction.next
-  }) : super(key: key);
+  const AuthTextField(
+      {Key? key,
+      required this.onFieldSubmitted,
+      this.textEditingController,
+      this.textFocusNode,
+      this.hintText,
+      this.validationText = '',
+      this.textFieldType = TextFieldType.email,
+      this.textInputType = TextInputType.emailAddress,
+      this.textInputAction = TextInputAction.next})
+      : super(key: key);
 
   @override
   State<AuthTextField> createState() => _AuthTextFieldState();
@@ -40,18 +41,13 @@ class _AuthTextFieldState extends State<AuthTextField> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30),
       child: ConstrainedBox(
-        constraints: const BoxConstraints(
-            maxWidth: 600,
-            maxHeight: 100
-        ),
+        constraints: const BoxConstraints(maxWidth: 600, maxHeight: 100),
         child: Container(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
                 border: Border.all(
                     color: HexColor.fromHex('#1C2938').withOpacity(0.5),
-                    width: 2
-                )
-            ),
+                    width: 2)),
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
             child: Row(
               children: [
@@ -62,13 +58,13 @@ class _AuthTextFieldState extends State<AuthTextField> {
                     focusNode: widget.textFocusNode,
                     keyboardType: widget.textInputType,
                     textInputAction: widget.textInputAction,
-                    obscureText: widget.textFieldType == TextFieldType.email || widget.textFieldType == TextFieldType.username
+                    obscureText: widget.textFieldType == TextFieldType.email ||
+                            widget.textFieldType == TextFieldType.username
                         ? false
                         : _obscureText,
-                    onChanged: (value) =>
-                        setState(() {
-                          _text = value;
-                        }),
+                    onChanged: (value) => setState(() {
+                      _text = value;
+                    }),
                     onFieldSubmitted: (val) => widget.onFieldSubmitted,
                     style: TextStyle(
                       color: HexColor.fromHex('#1C2938'),
@@ -86,7 +82,7 @@ class _AuthTextFieldState extends State<AuthTextField> {
                 ),
 
                 /// show password
-                if(widget.textFieldType == TextFieldType.password)
+                if (widget.textFieldType == TextFieldType.password)
                   AnimatedOnTapButton(
                     onTap: () {
                       setState(() {
@@ -94,19 +90,25 @@ class _AuthTextFieldState extends State<AuthTextField> {
                       });
                     },
                     child: Icon(
-                      !_obscureText ? Icons.remove_red_eye : Icons
-                          .remove_red_eye_outlined,
+                      !_obscureText
+                          ? Icons.remove_red_eye
+                          : Icons.remove_red_eye_outlined,
                       color: !_obscureText ? Colors.red : Colors.grey,
                     ),
                   ),
-                const SizedBox(width: 5,),
+                const SizedBox(
+                  width: 5,
+                ),
 
                 /// show error validation
-                if(widget.textFieldType == TextFieldType.email
-                    ? !isEmail(_text) : !isPassword(_text))
+                if (widget.textFieldType == TextFieldType.email
+                    ? !isEmail(_text)
+                    : !isPassword(_text))
                   AnimatedOnTapButton(
                     onTap: () {
-                      _toolTipController.showTooltip(autoClose: true,);
+                      _toolTipController.showTooltip(
+                        autoClose: true,
+                      );
                     },
                     child: IgnorePointer(
                       child: JustTheTooltip(
@@ -122,19 +124,16 @@ class _AuthTextFieldState extends State<AuthTextField> {
                           child: Text(
                             widget.validationText,
                             style: TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w500,
-                              color: HexColor.fromHex('#EFEEEE')
-                            ),
+                                fontSize: 10,
+                                fontWeight: FontWeight.w500,
+                                color: HexColor.fromHex('#EFEEEE')),
                           ),
                         ),
-
                       ),
                     ),
                   ),
               ],
-            )
-        ),
+            )),
       ),
     );
   }
