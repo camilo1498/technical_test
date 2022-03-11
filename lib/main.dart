@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:technical_test/src/presentation/pages/login/sign_in_page.dart';
 import 'package:technical_test/src/presentation/pages/user_tap_layout/user_layout.dart';
 
@@ -47,6 +48,25 @@ class _RootPage extends StatefulWidget {
 }
 
 class _RootPageState extends State<_RootPage> {
+
+  @override
+  void initState() {
+    _getPermission();
+    super.initState();
+  }
+
+  _getPermission() async{
+    var _permissionStatus = [
+      await Permission.camera.request(),
+      await Permission.storage.request()
+    ];
+    if(_permissionStatus[0].isGranted && _permissionStatus[1].isGranted){
+      debugPrint('camera permission granted');
+    } else if(await Permission.speech.isPermanentlyDenied){
+      openAppSettings();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<User?>(

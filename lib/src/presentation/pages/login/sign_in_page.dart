@@ -20,7 +20,7 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
-  /// form key
+  /// Scaffold key
   final GlobalKey _scaffoldKey = GlobalKey();
   /// controllers
   final TextEditingController _emailController = TextEditingController();
@@ -214,9 +214,11 @@ class _SignInPageState extends State<SignInPage> {
                 message: error.message!);
           }
       ).whenComplete(() {
-        setState(() {
-          _loading = !_loading;
-        });
+        if(mounted){
+          setState(() {
+            _loading = !_loading;
+          });
+        }
       });
     }
   }

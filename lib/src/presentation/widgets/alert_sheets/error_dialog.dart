@@ -49,20 +49,20 @@ Future<bool> exitDialog({required context, required String message, required Str
                 style: const TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w400,
-                    color: Colors.white38,
+                    color: Colors.white54,
                     letterSpacing: 0.1),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(
                 height: 40,
               ),
-              ///cancel
+              /// close
               AnimatedOnTapButton(
                 onTap: () {
                   Navigator.of(context).pop(false);
                 },
                 child: const Text(
-                  'Cancel',
+                  'Close',
                   style: TextStyle(
                       fontSize: 16,
                       color: Colors.white,
