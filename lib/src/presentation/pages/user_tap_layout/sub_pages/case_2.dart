@@ -37,7 +37,7 @@ class _Case2State extends State<Case2> {
         });
       }
     } on PlatformException catch (e) {
-      debugPrint('There was an error while taking the picture: ${e.message}');
+      debugPrint('There was an error taking the picture: ${e.message}');
     }
   }
 

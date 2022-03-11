@@ -215,11 +215,11 @@ class _SignUpPageState extends State<SignUpPage> {
           labelText: 'close',
           textColor: HexColor.fromHex('#EFEEEE'));
 
-      /// validate if both password fields are match
+      /// validate if both password fields match
     } else if (_pwdController.text.trim() != _pwdController2.text.trim()) {
       snackBar(
           scaffoldGlobalKey: _scaffoldKey,
-          message: "Password does not match.",
+          message: "Password do not match.",
           color: HexColor.fromHex('#1C2938'),
           labelText: 'close',
           textColor: HexColor.fromHex('#EFEEEE'));
