@@ -5,6 +5,7 @@ import 'package:technical_test/src/core/utils/extensions/hex_color.dart';
 import 'package:technical_test/src/core/utils/validations/textField_validator.dart';
 import 'package:technical_test/src/data/sources/firebase_authentication.dart';
 import 'package:technical_test/src/presentation/pages/register/sign_up_page.dart';
+import 'package:technical_test/src/presentation/widgets/alert_sheets/error_dialog.dart';
 import 'package:technical_test/src/presentation/widgets/alert_sheets/snackbar.dart';
 import 'package:technical_test/src/presentation/widgets/animations/page_transition_animation.dart';
 import 'package:technical_test/src/presentation/widgets/auth_text_field.dart';
@@ -206,7 +207,11 @@ class _SignInPageState extends State<SignInPage> {
           email: _emailController.text.trim(),
           password: _pwdController.text.trim(),
           errorCallback: (error){
-            print(error.message);
+            /// show error dialog
+            exitDialog(
+                title: 'Authentication error',
+                context: context,
+                message: error.message!);
           }
       ).whenComplete(() {
         setState(() {

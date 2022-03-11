@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:technical_test/src/core/utils/extensions/hex_color.dart';
 import 'package:technical_test/src/core/utils/validations/textField_validator.dart';
 import 'package:technical_test/src/data/sources/firebase_authentication.dart';
+import 'package:technical_test/src/presentation/widgets/alert_sheets/error_dialog.dart';
 import 'package:technical_test/src/presentation/widgets/alert_sheets/snackbar.dart';
 import 'package:technical_test/src/presentation/widgets/animations/animated_onTap_button.dart';
 import 'package:technical_test/src/presentation/widgets/auth_text_field.dart';
@@ -206,7 +207,11 @@ class _SignUpPageState extends State<SignUpPage> {
           email: _emailController.text.trim(),
           password: _pwdController2.text.trim(),
           errorCallback: (error){
-            print(error.message);
+            /// show error dialog
+            exitDialog(
+                title: 'Sign up error',
+                context: context,
+                message: error.message!);
           }
       ).then((value) {
         if(value != null){
