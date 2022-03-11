@@ -1,3 +1,17 @@
+# Dependencies used
+``` dart
+ just_the_tooltip: ^0.0.11+2  => to show overlay alert
+ firebase_auth: ^3.3.10       => to use google email auth
+ firebase_core: ^1.13.1       => is required to user firebase_auth
+ image_picker: ^0.8.4+11      => to use native camera
+ image_gallery_saver: ^1.7.1
+ photo_view:                  => to interact with the image
+   git:
+     url: https://github.com/bluefireteam/photo_view
+     ref: 8156907eecfa812b181a5a729d790f6d399f311b
+ permission_handler: ^9.2.0   => to manage device permission
+ http: ^0.13.4                => to manage http request
+```
 # App screenshots
 
 ### Sign in / sign up 
