@@ -1,3 +1,16 @@
+# Flutter 2.10.2, Dart 2.16.1
+
+# Download APK
+
+[Large apk file (41 mb)](https://drive.google.com/file/d/1oEe-gHZ2BUnxg_yEl0AsvPD4ENYjtwtS/view?usp=sharing)
+
+[Arm64-v8a apk file (15 mb)](https://drive.google.com/file/d/1dnd5KQhEFmq-dmWwzjjmlsBkB02nSExm/view?usp=sharing)
+
+[Armeabi-v7a apk file (13 mb)](https://drive.google.com/file/d/1rcAnfCi01dgV5BOhXFLdR84X4YpWOirY/view?usp=sharing)
+
+[x86_64 apk file (16 mb)](https://drive.google.com/file/d/12LjPqDhX97ysO62dAPpB_HgRpwZ94nbe/view?usp=sharing)
+
+
 # Dependencies used
 ``` dart
  just_the_tooltip: ^0.0.11+2  => to show overlay alert
