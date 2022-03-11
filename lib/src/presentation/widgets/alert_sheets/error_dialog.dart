@@ -36,6 +36,7 @@ Future<bool> exitDialog(
                   /// title
                   Text(
                     title,
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.w600,
@@ -45,32 +46,37 @@ Future<bool> exitDialog(
                   const SizedBox(
                     height: 20,
                   ),
-                  Text(
-                    message,
-                    style: const TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.white54,
-                        letterSpacing: 0.1),
-                    textAlign: TextAlign.center,
+                  Expanded(
+                    child: Text(
+                      message,
+                      style: const TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white54,
+                          letterSpacing: 0.1),
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                   const SizedBox(
-                    height: 40,
+                    height: 30,
                   ),
 
                   /// close
-                  AnimatedOnTapButton(
-                    onTap: () {
-                      Navigator.of(context).pop(false);
-                    },
-                    child: const Text(
-                      'Close',
-                      style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 0.5),
-                      textAlign: TextAlign.center,
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: AnimatedOnTapButton(
+                      onTap: () {
+                        Navigator.of(context).pop(false);
+                      },
+                      child: const Text(
+                        'Close',
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 0.5),
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                   ),
                 ],
